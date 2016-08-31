@@ -1,18 +1,23 @@
 {
   "manifest_version": 2,
 
-  "name":         "Adwords clicker script",
-  "description":  "Takes link from google adwords ad and emulates constant clicking on it",
-  "version":      "0.1",
+  "name"           :  "Adwords clicker script",
+  "description"    :  "Takes link from google adwords ad and emulates constant clicking on it",
+  "version"        :  "0.2",
+
+  "background": {
+    "scripts"      :  [ "js/adbkg.js" ],
+    "persistent"   :  true
+  },
 
   "content_scripts":[{
-    "all_frames":  true,
-    "js":          ["js/adclick.js"],
-    "matches":     [ "<all_urls>" ],
-    "run_at":      "document_start",
-    "persistent":  true
+    "all_frames"   :  true,
+    "js"           :  [ "js/adclick.js" ],
+    "matches"      :  [ "<all_urls>" ],
+    "run_at"       :  "document_start",
+    "persistent"   :  true
   }],
 
-  "permissions": [ "activeTab", "https://www.googleadservices.com/" ]
+  "permissions": [ "activeTab", "webRequest", "webRequestBlocking", "https://www.googleadservices.com/" ]
 
 }
