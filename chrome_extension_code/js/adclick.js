@@ -3,19 +3,25 @@
 	var adclick = function()
 	{
 
+		// Process headers using messaging sys
+		// THIS SEEMS NOT TO WORK!!!, NO MSG FROM BKG PROCESS!!!?!!
+		chrome.runtime.onMessage.addListener(function(msg, sender, callback) {
+			console.log('msg >>>', msg)
+		});
+
 		document.addEventListener('DOMContentLoaded', 
 			function(){
 
+
+
+
 				var click_it = function(url, data)
 				{
-
-					var id_pattern = /\d+/;
 
 					// TODO: this is not brigthest idea, you should return to xhr request
 					var perform_request = function(timeout) {
 
 						//TODO: check which url to use
-						// TODO: link has some num value, most likley it has to be updated
 						// console.log('visiting url:' , url);
 						// console.log('visiting data:', data);
 
@@ -23,15 +29,31 @@
 						// ok, for now single request is enough! stop playing with it!?
 						var xhr = new XMLHttpRequest();
 
-						xhr.addEventListener('abort', function() {
-							if( xhr.status === 0 ){
-								// setTimeout(perform_request, timeout, timeout);
-								// change id of the url first
-							}
-						});
+						// xhr.addEventListener('abort', function() {
+						// 	if( xhr.status === 0 ){
+						// 		// setTimeout(perform_request, timeout, timeout);
+						// 		// change id of the url first
+						// 	}
+						// });
 
-						xhr.open('GET', url, true);
-						xhr.send();
+
+						var domain = "test";
+
+						// setup header intercept message
+						chrome.runtime.sendMessage({
+							"domain"           : domain
+						}, 
+						function(resp) {
+							// console.log('!! response from orig', resp.msg)
+
+							if(resp.status){
+								// console.log("Opening request for: " + url);
+
+								xhr.open('GET', url, true);
+								xhr.send();
+							}
+
+						});
 
 					}
 
