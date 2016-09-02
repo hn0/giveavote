@@ -10,22 +10,29 @@
 			if( msg.domain ){
 
 				// TODO: place here domain name
-				chrome.webRequest.onHeadersReceived.addListener(function() {
-
-					// TODO: response needs to be controlled from this fnc?
-					chrome.runtime.sendMessage({
-						'msg' : 'this is msg from headers'
+				// BUT FIRST WOULD BE TO EXTRACT LISTEN DOMAIN!
+				// TODO: use msg system to retrive return value
+				// Actually what to do here!
+				chrome.webRequest.onHeadersReceived.addListener(function(options) {
+					
+					chrome.tabs.query({
+							active:        true,
+							currentWindow: true
+						}, 
+						function(tabs) {
+							chrome.tabs.sendMessage(tabs[0].id, {
+								'url':    options.url,
+								'status': options.statusCode
+							});
 					});
 
 
+					// thread sleep until message gets back
 					return true;
+
 				}, 
 				{urls: ['<all_urls>']}, 
 				['responseHeaders']);
-
-				chrome.runtime.sendMessage({
-						'msgNEW!!!' : 'this is msg from headers'
-					});
 
 				res = true;
 			}
@@ -33,8 +40,7 @@
 
 			if( callback ){
 				callback({
-					"status" : res,
-					"msg"    : msg
+					"status" : res
 				});
 			}
 

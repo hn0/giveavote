@@ -4,16 +4,14 @@
 	{
 
 		// Process headers using messaging sys
-		// THIS SEEMS NOT TO WORK!!!, NO MSG FROM BKG PROCESS!!!?!!
 		chrome.runtime.onMessage.addListener(function(msg, sender, callback) {
-			console.log('msg >>>', msg)
+			// console.log('msg >>>', msg)
+
+			// Ok, msg is beeing transmitted but how should I respond to it!
 		});
 
 		document.addEventListener('DOMContentLoaded', 
 			function(){
-
-
-
 
 				var click_it = function(url, data)
 				{
