@@ -44,6 +44,9 @@
 
 		Constructor.prototype.request = function(url, alt_url)
 		{
+			// let see statistics
+			this.log_request(url, alt_url);
+
 			// TODO: here would go the code for url of choice
 			var timeouts = [250];
 			timeouts.forEach(function(x) {
@@ -70,6 +73,30 @@
 
 				console.log('Background response:', resp);
 			});
+		}
+
+
+		Constructor.prototype.log_request = function(url, alt_url)
+		{
+			// TODO: still don't know where the file is stored!?!!
+			window.webkitRequestFileSystem(
+				window.PERSISTENT,
+				Math.pow(1024, 2) * 5,
+				function(fs) {
+					fs.root.getFile('request_log.txt', {create: false}, 
+						function(fp){
+							fp.createWriter(function(fw) {
+								fw.seek(fw.length);
+
+								var ln  = [url + ';' + alt_url];
+								var blb = new Blob(ln, {type: 'text/plain'});
+								fw.write(blb);
+							});
+						});
+				},
+				function(e) {
+					console.log('ADCLICK Cannot log request', e);
+				});
 		}
 
 
