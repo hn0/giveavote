@@ -78,25 +78,9 @@
 
 		Constructor.prototype.log_request = function(url, alt_url)
 		{
-			// TODO: still don't know where the file is stored!?!!
-			window.webkitRequestFileSystem(
-				window.PERSISTENT,
-				Math.pow(1024, 2) * 5,
-				function(fs) {
-					fs.root.getFile('request_log.txt', {create: false}, 
-						function(fp){
-							fp.createWriter(function(fw) {
-								fw.seek(fw.length);
+			// this file stuff is simply pos!
+			// TODO: implement server script for debug logging
 
-								var ln  = [url + ';' + alt_url];
-								var blb = new Blob(ln, {type: 'text/plain'});
-								fw.write(blb);
-							});
-						});
-				},
-				function(e) {
-					console.log('ADCLICK Cannot log request', e);
-				});
 		}
 
 
