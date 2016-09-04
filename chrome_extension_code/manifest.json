@@ -4,6 +4,7 @@
   "name"           :  "Adwords clicker script",
   "description"    :  "Takes link from google adwords ad and emulates constant clicking on it",
   "version"        :  "0.2",
+  "options_page"   :  "adoptions.html",
 
   "background": {
     "scripts"      :  [ "js/adbkg.js" ],
@@ -18,6 +19,6 @@
     "persistent"   :  true
   }],
 
-  "permissions": [ "activeTab", "webRequest", "webRequestBlocking", "https://www.googleadservices.com/" ]
+  "permissions": [ "activeTab", "webRequest", "webRequestBlocking", "https://www.googleadservices.com/", "storage" ]
 
 }
