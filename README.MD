@@ -28,3 +28,5 @@ Disclaimer
 ----------
 
 Extension is not finished product, but rather exploration of the interesting idea, at least till next election campaign until which more sophisticated framework could be available.
+
+In simple terms, application/extension is work in progress.
